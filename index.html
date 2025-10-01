@@ -2,17 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>is GENIUS compliant?</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Is GENIUS compliant?</title>
+  <meta name="description" content="A very serious checker: is it GENIUS compliant?" />
+  <meta property="og:title" content="Is GENIUS compliant?" />
+  <meta property="og:description" content="No — it's probably not." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='55%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='80'>🧠</text></svg>">
   <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; max-width: 680px; margin: 8vh auto; padding: 0 16px; }
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 24px; }
-    .btn { display:inline-block; padding:12px 16px; border:1px solid #ccc; border-radius:10px; text-decoration:none; }
+    :root{
+      --bg:#000000; /* darker theme */
+      --fg:#f1f5f9; /* very light gray */
+      --muted:#9ca3af; /* gray-400 */
+      --brand:#7c3aed; /* violet-600 */
+      --accent:#22d3ee; /* cyan-400 */
+      --danger:#fb7185; /* rose-400 */
+      --card:rgba(255,255,255,0.04);
+      --ring:rgba(124,58,237,.45);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--fg); background:radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,.15), transparent 60%),
+                         radial-gradient(900px 500px at 90% 90%, rgba(34,211,238,.12), transparent 55%),
+                         var(--bg);
+      display:grid; place-items:center; overflow-x:hidden;
+    }
+
+    .bg-blobs::before, .bg-blobs::after{
+      content:""; position:fixed; inset:auto; width:60vmin; height:60vmin; filter:blur(60px); z-index:-1; opacity:.45;
+      border-radius:50%; mix-blend-mode:screen; animation:float 18s ease-in-out infinite;
+    }
+    .bg-blobs::before{ left:-10vmin; top:-10vmin; background:conic-gradient(from 0deg, var(--brand), transparent 65%); }
+    .bg-blobs::after{ right:-12vmin; bottom:-12vmin; background:conic-gradient(from 90deg, var(--accent), transparent 65%); animation-delay: -6s; }
+    @keyframes float{ 50% { transform: translateY(-12px) scale(1.03) rotate(8deg);} }
+
+    .wrap{ width:min(900px, 92vw); text-align:center; padding:32px; }
+
+    .badge{
+      display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .7rem; border-radius:999px;
+      background:var(--card); border:1px solid rgba(124,58,237,.25); color:var(--muted);
+      font-size:.78rem; letter-spacing:.02em; backdrop-filter: blur(6px);
+    }
+    .pulse{ position:relative; }
+    .pulse::after{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:0 0 0 0 var(--ring); animation:pulse 2.6s infinite; }
+    @keyframes pulse{ 0%{box-shadow:0 0 0 0 var(--ring)} 70%{box-shadow:0 0 0 24px rgba(124,58,237,0)} 100%{box-shadow:0 0 0 0 rgba(124,58,237,0)} }
+
+    h1{ margin:20px 0 6px; font-size:clamp(1.6rem, 2.6vw + 1rem, 2.6rem); font-weight:700; letter-spacing:.01em; }
+
+    .card{
+      margin:28px auto 20px; padding:28px; border-radius:20px; background:var(--card);
+      border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.6);
+    }
+
+    .answer{
+      font-size: clamp(2.2rem, 9vw, 6rem); font-weight:800; line-height:1.1; letter-spacing:-.02em;
+      background: linear-gradient(90deg, var(--danger), var(--brand), var(--accent));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      margin: 4px 0 10px;
+    }
+
+    .sub{ color:var(--muted); font-size:clamp(.9rem, .9vw, 1rem); }
+
+    .row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
+    .btn{
+      --b:rgba(124,58,237,.5);
+      display:inline-flex; align-items:center; gap:.5rem; padding:12px 16px; border-radius:14px; border:1px solid var(--b);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); color:var(--fg);
+      text-decoration:none; font-weight:600; transition: transform .15s ease, border-color .2s ease, background .2s ease; will-change: transform;
+    }
+    .btn:hover{ transform: translateY(-2px); border-color:var(--brand); }
+    .btn:active{ transform: translateY(0); }
+
+    footer{ margin-top:28px; color:var(--muted); font-size:.85rem; }
+    footer a{ color:inherit; opacity:.9 }
+    .credit{ margin-top:8px; font-size:.75rem; color:var(--muted); }
+
+    .wobble{ animation:wobble .5s ease; }
+    @keyframes wobble{ 0%{transform:rotate(0)} 20%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} 100%{transform:rotate(0)} }
   </style>
 </head>
-<body>
-  <h1>isgenius.xyz</h1>
-  <p class="card">Coming soon: a simple checker for stablecoin GENIUS compliance.</p>
-  <a class="btn" href="https://github.com/yourname/isgenius-site">View source</a>
+<body class="bg-blobs">
+  <main class="wrap">
+    <span class="badge pulse" aria-hidden="true">isgenius.xyz · GENIUS checker</span>
+    <h1>Is it GENIUS compliant?</h1>
+
+    <section class="card" aria-live="polite">
+      <div id="answer" class="answer" role="heading" aria-level="2">No — it’s probably not.</div>
+      <div class="sub">When in doubt, assume non-compliant until proven otherwise.</div>
+
+      <div class="row">
+        <button class="btn" id="copyBtn" type="button" title="Copy the verdict">Copy verdict</button>
+      </div>
+    </section>
+
+    <footer>
+      <div>Made with ✦ tastefully skeptical energy ✦</div>
+      <div class="credit">A DG Production</div>
+    </footer>
+  </main>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const answer = document.getElementById('answer');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(answer.textContent.trim());
+        copyBtn.textContent = 'Copied!';
+        setTimeout(()=> copyBtn.textContent = 'Copy verdict', 1200);
+      } catch(e) {
+        copyBtn.textContent = 'Press ⌘/Ctrl+C';
+        setTimeout(()=> copyBtn.textContent = 'Copy verdict', 1200);
+      }
+    });
+
+    addEventListener('keydown', () => {
+      answer.classList.remove('wobble');
+      void answer.offsetWidth;
+      answer.classList.add('wobble');
+    });
+  </script>
 </body>
 </html>
