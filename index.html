@@ -1,130 +1,399 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Is GENIUS compliant?</title>
-  <meta name="description" content="A very serious checker: is it GENIUS compliant?" />
-  <meta property="og:title" content="Is GENIUS compliant?" />
-  <meta property="og:description" content="No — it's probably not." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#000000" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='55%' x='50%' dominant-baseline='middle' text-anchor='middle' font-size='80'>🧠</text></svg>">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>is genius?</title>
+  <meta name="description" content="Genius is not intelligence operating within a system. Genius changes the system itself.">
+
+  <meta property="og:title" content="is genius?">
+  <meta property="og:description" content="Genius is not intelligence operating within a system. Genius changes the system itself.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://isgenius.xyz">
+  <meta property="og:image" content="https://isgenius.xyz/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="is genius?">
+  <meta name="twitter:description" content="Genius is not intelligence operating within a system. Genius changes the system itself.">
+  <meta name="twitter:image" content="https://isgenius.xyz/og.png">
+  <meta name="theme-color" content="#08090a">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='11' fill='none' stroke='%236b8afd' stroke-width='1.2'/></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400&family=Space+Grotesk:wght@300;400&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg:#000000; /* darker theme */
-      --fg:#f1f5f9; /* very light gray */
-      --muted:#9ca3af; /* gray-400 */
-      --brand:#7c3aed; /* violet-600 */
-      --accent:#22d3ee; /* cyan-400 */
-      --danger:#fb7185; /* rose-400 */
-      --card:rgba(255,255,255,0.04);
-      --ring:rgba(124,58,237,.45);
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #08090a;
+      --text: #c8ccd0;
+      --text-bright: #e4e7eb;
+      --accent: #6b8afd;
+      --accent-dim: #3d4f7a;
+      --muted: #4a4e55;
+      --border: rgba(107, 138, 253, 0.08);
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      color:var(--fg); background:radial-gradient(1200px 600px at 10% 10%, rgba(124,58,237,.15), transparent 60%),
-                         radial-gradient(900px 500px at 90% 90%, rgba(34,211,238,.12), transparent 55%),
-                         var(--bg);
-      display:grid; place-items:center; overflow-x:hidden;
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .bg-blobs::before, .bg-blobs::after{
-      content:""; position:fixed; inset:auto; width:60vmin; height:60vmin; filter:blur(60px); z-index:-1; opacity:.45;
-      border-radius:50%; mix-blend-mode:screen; animation:float 18s ease-in-out infinite;
-    }
-    .bg-blobs::before{ left:-10vmin; top:-10vmin; background:conic-gradient(from 0deg, var(--brand), transparent 65%); }
-    .bg-blobs::after{ right:-12vmin; bottom:-12vmin; background:conic-gradient(from 90deg, var(--accent), transparent 65%); animation-delay: -6s; }
-    @keyframes float{ 50% { transform: translateY(-12px) scale(1.03) rotate(8deg);} }
-
-    .wrap{ width:min(900px, 92vw); text-align:center; padding:32px; }
-
-    .badge{
-      display:inline-flex; align-items:center; gap:.5rem; padding:.4rem .7rem; border-radius:999px;
-      background:var(--card); border:1px solid rgba(124,58,237,.25); color:var(--muted);
-      font-size:.78rem; letter-spacing:.02em; backdrop-filter: blur(6px);
-    }
-    .pulse{ position:relative; }
-    .pulse::after{ content:""; position:absolute; inset:0; border-radius:inherit; box-shadow:0 0 0 0 var(--ring); animation:pulse 2.6s infinite; }
-    @keyframes pulse{ 0%{box-shadow:0 0 0 0 var(--ring)} 70%{box-shadow:0 0 0 24px rgba(124,58,237,0)} 100%{box-shadow:0 0 0 0 rgba(124,58,237,0)} }
-
-    h1{ margin:20px 0 6px; font-size:clamp(1.6rem, 2.6vw + 1rem, 2.6rem); font-weight:700; letter-spacing:.01em; }
-
-    .card{
-      margin:28px auto 20px; padding:28px; border-radius:20px; background:var(--card);
-      border:1px solid rgba(255,255,255,.08); backdrop-filter: blur(8px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.6);
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.4vw, 1.1rem);
+      line-height: 1.85;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .answer{
-      font-size: clamp(2.2rem, 9vw, 6rem); font-weight:800; line-height:1.1; letter-spacing:-.02em;
-      background: linear-gradient(90deg, var(--danger), var(--brand), var(--accent));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-      margin: 4px 0 10px;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(107,138,253,0.04) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .sub{ color:var(--muted); font-size:clamp(.9rem, .9vw, 1rem); }
-
-    .row{ display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
-    .btn{
-      --b:rgba(124,58,237,.5);
-      display:inline-flex; align-items:center; gap:.5rem; padding:12px 16px; border-radius:14px; border:1px solid var(--b);
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.01)); color:var(--fg);
-      text-decoration:none; font-weight:600; transition: transform .15s ease, border-color .2s ease, background .2s ease; will-change: transform;
+    ::selection {
+      background: rgba(107, 138, 253, 0.2);
+      color: var(--text-bright);
     }
-    .btn:hover{ transform: translateY(-2px); border-color:var(--brand); }
-    .btn:active{ transform: translateY(0); }
 
-    footer{ margin-top:28px; color:var(--muted); font-size:.85rem; }
-    footer a{ color:inherit; opacity:.9 }
-    .credit{ margin-top:8px; font-size:.75rem; color:var(--muted); }
+    /* ===== LAYOUT ===== */
+    .transmission {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: clamp(80px, 14vh, 180px) clamp(24px, 6vw, 48px);
+      position: relative;
+      z-index: 1;
+      animation: arrive 1.5s ease-out both;
+    }
 
-    .wobble{ animation:wobble .5s ease; }
-    @keyframes wobble{ 0%{transform:rotate(0)} 20%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} 100%{transform:rotate(0)} }
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 1px;
+      width: 0%;
+      background: var(--accent);
+      opacity: 0.4;
+      z-index: 10;
+      transition: width 0.1s linear;
+    }
+
+    /* ===== HEADER ===== */
+    .signal-line {
+      display: block;
+      width: 0;
+      height: 1px;
+      background: var(--accent-dim);
+      margin: 0 auto 2.5em;
+      border: none;
+      opacity: 0.5;
+      animation: line-extend 1s ease-out 0.3s forwards;
+    }
+
+    @keyframes line-extend {
+      to { width: 60px; }
+    }
+
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 3.5em;
+    }
+
+    h1 .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(4px);
+      animation: decode 0.5s ease-out forwards;
+    }
+
+    @keyframes decode {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== VERSES ===== */
+    .verse {
+      margin-bottom: 2.2em;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .verse.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .verse p {
+      font-feature-settings: 'liga' 1, 'kern' 1;
+    }
+
+    /* ===== DIVIDERS ===== */
+    .divider {
+      text-align: center;
+      margin: 2em 0 2.5em;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .divider.revealed { opacity: 1; transform: translateY(0); }
+
+    .divider hr {
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--accent-dim);
+      margin: 0 auto;
+      border: none;
+      opacity: 0.35;
+    }
+
+    /* ===== APHORISM ===== */
+    .verse--aphorism {
+      border-left: 1px solid transparent;
+      padding-left: 1.5em;
+      margin-left: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease, border-color 0.6s ease 0.4s;
+    }
+
+    .verse--aphorism.revealed {
+      border-left-color: var(--accent-dim);
+    }
+
+    .verse--aphorism p {
+      font-weight: 400;
+      font-size: 1.05em;
+      color: var(--text-bright);
+    }
+
+    /* ===== CLOSING ===== */
+    .closing-emphasis {
+      color: var(--accent);
+      font-weight: 400;
+      transition: text-shadow 0.6s ease;
+    }
+
+    .verse--closing.revealed .closing-emphasis {
+      animation: glow-in 2s ease-out 0.5s both;
+    }
+
+    @keyframes glow-in {
+      0% { text-shadow: none; }
+      40% { text-shadow: 0 0 20px rgba(107, 138, 253, 0.3); }
+      100% { text-shadow: none; }
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      margin-top: 4em;
+      text-align: center;
+    }
+
+    footer {
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    footer.revealed { opacity: 1; }
+
+    footer hr {
+      display: block;
+      width: 0;
+      height: 1px;
+      background: var(--accent-dim);
+      margin: 0 auto 1.5em;
+      border: none;
+      opacity: 0.5;
+    }
+
+    footer.revealed hr {
+      animation: line-extend 0.8s ease-out 0.2s forwards;
+    }
+
+    .colophon-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 480px) {
+      .transmission {
+        padding: 60px 20px;
+      }
+      .verse { margin-bottom: 1.8em; }
+      h1 { margin-bottom: 2.5em; letter-spacing: 0.14em; }
+    }
+
+    /* ===== ACCESSIBILITY ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .transmission { animation: none; }
+      .verse, .divider, footer { opacity: 1; transform: none; transition: none; }
+      h1 .char { opacity: 1; transform: none; animation: none; }
+      .signal-line, footer hr { width: 60px; animation: none; }
+      .progress { display: none; }
+      .verse--closing.revealed .closing-emphasis { animation: none; }
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body { background: white; color: #1a1a1a; }
+      body::before { display: none; }
+      .verse, .divider { opacity: 1; transform: none; }
+      h1, .closing-emphasis { color: #1a1a1a; }
+      .signal-line, footer hr { background: #ccc; }
+    }
   </style>
 </head>
-<body class="bg-blobs">
-  <main class="wrap">
-    <span class="badge pulse" aria-hidden="true">isgenius.xyz · GENIUS checker</span>
-    <h1>Is it GENIUS compliant?</h1>
 
-    <section class="card" aria-live="polite">
-      <div id="answer" class="answer" role="heading" aria-level="2">No — it’s probably not.</div>
-      <div class="sub">When in doubt, assume non-compliant until proven otherwise.</div>
+<body>
 
-      <div class="row">
-        <button class="btn" id="copyBtn" type="button" title="Copy the verdict">Copy verdict</button>
-      </div>
-    </section>
+  <div class="progress" aria-hidden="true"></div>
+
+  <div class="transmission">
+
+    <header>
+      <hr class="signal-line" aria-hidden="true">
+      <h1>is genius?</h1>
+    </header>
+
+    <article>
+
+      <section class="verse" data-verse="1">
+        <p>We misuse the word. We call someone a genius when they are intelligent, a product genius when it performs well, an idea genius when it is new. But intelligence operates within a system. Genius changes the system itself.</p>
+      </section>
+
+      <section class="verse" data-verse="2">
+        <p>Not every disruption qualifies. Crises and accidents alter outcomes, but genius is intentional. It is design that makes the previous arrangement of incentives inefficient.</p>
+      </section>
+
+      <div class="divider" aria-hidden="true"><hr></div>
+
+      <section class="verse" data-verse="3">
+        <p>In economics, incentives shape behavior and behavior shapes institutions. Institutions feel permanent until something quietly renders them unnecessary.</p>
+      </section>
+
+      <section class="verse" data-verse="4">
+        <p>Genius lowers the cost of coordination across domains. When coordination becomes cheaper, power moves. Individuals gain leverage relative to hierarchy. Outsiders gain leverage relative to incumbents. What once required scale, permission, or capital becomes accessible. Constraints that felt structural are revealed as friction.</p>
+      </section>
+
+      <section class="verse" data-verse="5">
+        <p>Most things praised as genius are optimized within the current equilibrium. They perform brilliantly under existing assumptions. True genius changes what is scarce and what is abundant. It shifts who can act and how quickly. It does not merely win the game. It alters the game's architecture.</p>
+      </section>
+
+      <div class="divider" aria-hidden="true"><hr></div>
+
+      <section class="verse" data-verse="6">
+        <p>The change compounds. Adoption increases usefulness. Usefulness increases adoption. Feedback loops accelerate. What began as optional becomes default. What once dominated survives only by habit.</p>
+      </section>
+
+      <section class="verse verse--aphorism" data-verse="7">
+        <p>You know you are near genius when intelligent people begin defending constraints that quietly stopped mattering.</p>
+      </section>
+
+      <section class="verse verse--closing" data-verse="8">
+        <p>So the question is not who is genius. The question is whether something reorders coordination and redistributes agency in a way that compounds. If it does not, it may be impressive. <span class="closing-emphasis">But it is not genius.</span></p>
+      </section>
+
+    </article>
 
     <footer>
-      <div>Made with ✦ tastefully skeptical energy ✦</div>
-      <div class="credit">A DG Production</div>
+      <hr aria-hidden="true">
+      <span class="colophon-text">isgenius.xyz</span>
     </footer>
-  </main>
+
+  </div>
 
   <script>
-    const copyBtn = document.getElementById('copyBtn');
-    const answer = document.getElementById('answer');
-    copyBtn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(answer.textContent.trim());
-        copyBtn.textContent = 'Copied!';
-        setTimeout(()=> copyBtn.textContent = 'Copy verdict', 1200);
-      } catch(e) {
-        copyBtn.textContent = 'Press ⌘/Ctrl+C';
-        setTimeout(()=> copyBtn.textContent = 'Copy verdict', 1200);
+    (function() {
+      // Title decode: wrap each character in a span with staggered delay
+      var h1 = document.querySelector('h1');
+      var text = h1.textContent;
+      h1.innerHTML = '';
+      for (var i = 0; i < text.length; i++) {
+        var span = document.createElement('span');
+        span.className = 'char';
+        span.textContent = text[i] === ' ' ? '\u00a0' : text[i];
+        span.style.animationDelay = (0.8 + i * 0.06) + 's';
+        h1.appendChild(span);
       }
-    });
 
-    addEventListener('keydown', () => {
-      answer.classList.remove('wobble');
-      void answer.offsetWidth;
-      answer.classList.add('wobble');
-    });
+      // Progress bar
+      var progress = document.querySelector('.progress');
+      window.addEventListener('scroll', function() {
+        var scrollTop = document.documentElement.scrollTop;
+        var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        if (docHeight > 0) {
+          progress.style.width = (scrollTop / docHeight * 100) + '%';
+        }
+      }, { passive: true });
+
+      // Scroll reveals with stagger
+      var targets = document.querySelectorAll('.verse, .divider');
+      var ft = document.querySelector('footer');
+      var revealIndex = 0;
+
+      if (!window.IntersectionObserver) {
+        targets.forEach(function(el) { el.classList.add('revealed'); });
+        if (ft) ft.classList.add('revealed');
+        return;
+      }
+
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            // Add a progressive delay based on reveal order
+            var delay = revealIndex * 80;
+            setTimeout(function() {
+              entry.target.classList.add('revealed');
+            }, delay);
+            revealIndex++;
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      targets.forEach(function(el) { observer.observe(el); });
+
+      // Footer reveal
+      if (ft) {
+        var ftObserver = new IntersectionObserver(function(entries) {
+          if (entries[0].isIntersecting) {
+            ft.classList.add('revealed');
+            ftObserver.unobserve(ft);
+          }
+        }, { threshold: 0.1 });
+        ftObserver.observe(ft);
+      }
+    })();
   </script>
+
 </body>
 </html>
